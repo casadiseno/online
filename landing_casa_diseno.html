@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casa Diseño · Camila Ramírez · Asesorías de Decoración</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sand: #F2EDE4;
+  --sand-dark: #E8E0D3;
+  --clay: #C4623A;
+  --clay-light: #D4845F;
+  --clay-dark: #9B4A2A;
+  --ink: #1A1612;
+  --ink-soft: #3D3530;
+  --stone: #8A7E74;
+  --stone-light: #B5ACA4;
+  --white: #FDFAF6;
+  --green: #3B6442;
+  --purple: #4A3580;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--sand);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ---- NOISE TEXTURE OVERLAY ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--sand));
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 10vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--clay);
+}
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--stone);
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero-desc {
+  max-width: 520px;
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  border: 1px solid rgba(196,98,58,0.2);
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
+}
+
+.hero-badge span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--clay);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ---- DECORATIVE LINE ---- */
+.deco-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 4rem auto 3rem;
+  max-width: 600px;
+  padding: 0 2rem;
+}
+.deco-line::before, .deco-line::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--stone-light), transparent);
+}
+.deco-line-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--stone);
+  white-space: nowrap;
+}
+
+/* ---- SECTION ---- */
+.section {
+  padding: 2rem 1.5rem 5rem;
+  max-width: 980px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--ink);
+}
+
+/* ---- SERVICES GRID ---- */
+.services {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 680px) {
+  .services { grid-template-columns: 1fr; }
+}
+
+.service-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(26,22,18,0.1);
+}
+
+.service-card-top {
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+}
+
+.service-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  opacity: 0.07;
+  color: var(--ink);
+}
+
+.service-tag {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.service-tagline {
+  font-size: 13px;
+  color: var(--stone);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.service-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.service-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.service-price-label {
+  font-size: 12px;
+  color: var(--stone);
+  letter-spacing: 0.05em;
+}
+
+/* INCLUDES */
+.service-includes {
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--sand-dark);
+  background: var(--sand);
+}
+
+.include-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  padding: 5px 0;
+}
+
+.include-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+/* PROCESO */
+.service-proceso {
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--sand-dark);
+}
+
+.proceso-title {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.proceso-steps {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.proceso-step {
+  flex: 1;
+  min-width: 70px;
+  background: var(--sand);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.proceso-step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1;
+  margin-bottom: 3px;
+  display: block;
+}
+
+/* BUTTONS */
+.service-cta {
+  padding: 1.5rem 2rem 2rem;
+}
+
+.btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.btn-whatsapp:hover { filter: brightness(1.08); transform: scale(1.01); }
+.btn-whatsapp:active { transform: scale(0.98); }
+
+.btn-mp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1.5px solid var(--sand-dark);
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--stone);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-mp:hover {
+  border-color: var(--stone-light);
+  color: var(--ink-soft);
+  background: var(--sand);
+}
+
+.btn-mp-label {
+  font-size: 10px;
+  text-align: center;
+  color: var(--stone-light);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ---- DIFERENCIA BANNER ---- */
+.diferencia {
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.diferencia::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: var(--clay);
+  opacity: 0.08;
+}
+
+@media (max-width: 560px) {
+  .diferencia { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+.dif-item { position: relative; z-index: 1; }
+
+.dif-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.dif-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.dif-detail {
+  font-size: 13px;
+  color: var(--stone-light);
+  line-height: 1.7;
+}
+
+.dif-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.1);
+  align-self: stretch;
+}
+
+@media (max-width: 560px) { .dif-divider { display: none; } }
+
+/* ---- TESTIMONIO ---- */
+.testimonios {
+  padding: 2rem 1.5rem 5rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.testimonio-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8rem;
+  line-height: 0.5;
+  color: var(--clay);
+  opacity: 0.15;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.testimonio-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.6;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.testimonio-autor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonio-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--clay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  color: white;
+  font-style: italic;
+}
+
+.testimonio-nombre {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.testimonio-proyecto {
+  font-size: 12px;
+  color: var(--stone);
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.star {
+  width: 12px; height: 12px;
+  background: #F5A623;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+/* ---- QUIEN SOY ---- */
+.quien-soy {
+  background: var(--clay);
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.quien-soy::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: -80px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.04;
+}
+
+.quien-soy-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.quien-soy-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.quien-soy-title em { font-style: italic; }
+
+.quien-soy-text {
+  max-width: 580px;
+  margin: 0 auto 2rem;
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.9;
+}
+
+.quien-soy-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 40px;
+  padding: 10px 20px;
+  font-size: 13px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.quien-soy-ig:hover { background: rgba(255,255,255,0.25); }
+
+/* ---- FAQ ---- */
+.faq-section {
+  padding: 4rem 1.5rem 5rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--sand-dark);
+  padding: 1.25rem 0;
+}
+
+.faq-q {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.faq-q::after {
+  content: '+';
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--clay);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+.faq-a {
+  font-size: 14px;
+  color: var(--stone);
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.open .faq-a { max-height: 200px; }
+
+/* ---- FOOTER ---- */
+footer {
+  background: var(--ink);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  color: var(--stone-light);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  font-size: 12px;
+  color: var(--stone);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.footer-link:hover { color: var(--clay-light); }
+
+/* ---- STICKY CTA MOBILE ---- */
+.sticky-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--sand-dark);
+  padding: 1rem 1.5rem;
+  display: none;
+  gap: 0.75rem;
+  z-index: 100;
+}
+
+@media (max-width: 680px) {
+  .sticky-cta { display: flex; }
+  body { padding-bottom: 80px; }
+}
+
+.sticky-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.8); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Casa Diseño · Camila Ramírez · Arquitecta de Interiores</div>
+  <h1 class="hero-title">Decora con<br><em>criterio.</em></h1>
+  <p class="hero-subtitle">Sin improvisar. Sin gastar de más.</p>
+  <p class="hero-desc">Te gusta el diseño pero no te resulta. Te guío para tomar las decisiones correctas en tu espacio — con la misma metodología que uso en proyectos de alta gama, al alcance de tu presupuesto.</p>
+  <div class="hero-badge"><span></span> Cupos disponibles esta semana</div>
+</section>
+
+<!-- DIFERENCIA -->
+<div class="section" style="padding-top:0;">
+  <div class="diferencia reveal">
+    <div class="dif-item">
+      <span class="dif-label" style="color:var(--clay-light);">🔍 Diagnóstico Express</span>
+      <div class="dif-name">1 espacio · con fotos</div>
+      <div class="dif-detail">Me envías fotos, analizo con mi metodología y te entrego un plan de acción en PDF en 48 horas. Sin videollamada — rápido y directo.</div>
+    </div>
+    <div class="dif-divider"></div>
+    <div class="dif-item">
+      <span class="dif-label" style="color:#A89FD4;">📐 Asesoría 1:1 Online</span>
+      <div class="dif-name">Todos los espacios · en vivo</div>
+      <div class="dif-detail">Sesión por Zoom donde recorres tu casa con el celular. Trabajamos el espacio real en directo — no fotos. Grabación + PDF + 1 semana de WhatsApp.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" style="padding-top:0;">
+  <div class="section-label">Servicios</div>
+  <h2 class="section-title reveal">Elige tu punto<br><em>de partida</em></h2>
+
+  <div class="services">
+
+    <!-- SERVICIO 1 -->
+    <div class="service-card reveal">
+      <div class="service-card-top">
+        <div class="service-num">1</div>
+        <span class="service-tag" style="color:var(--green);">Para empezar · 1 espacio</span>
+        <div class="service-name">Diagnóstico<br>Express</div>
+        <div class="service-tagline">Fotos → plan de acción en 48 hrs</div>
+        <div class="service-price-block">
+          <span class="service-price" style="color:var(--green);">$29.900</span>
+          <span class="service-price-label">CLP</span>
+        </div>
+      </div>
+
+      <div class="service-includes">
+        <div class="include-item"><div class="include-dot" style="background:var(--green);"></div><span>Análisis de 1 espacio con tus fotos</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--green);"></div><span>Problemas principales y por qué ocurren</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--green);"></div><span>Plan priorizado: qué cambiar primero</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--green);"></div><span>Recomendaciones de presupuesto</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--green);"></div><span>PDF resumen con todos los pasos</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--green);"></div><span>Entrega en 48 horas hábiles</span></div>
+      </div>
+
+      <div class="service-proceso">
+        <div class="proceso-title">Cómo funciona</div>
+        <div class="proceso-steps">
+          <div class="proceso-step"><span class="proceso-step-num">1</span>Pagas y confirmo cupo</div>
+          <div class="proceso-step"><span class="proceso-step-num">2</span>Envías fotos por WA</div>
+          <div class="proceso-step"><span class="proceso-step-num">3</span>Analizo tu espacio</div>
+          <div class="proceso-step"><span class="proceso-step-num">4</span>Recibes tu PDF</div>
+        </div>
+      </div>
+
+      <div class="service-cta">
+        <a href="https://wa.me/56920365399?text=Hola%20Camila%2C%20quiero%20info%20sobre%20el%20Diagnóstico%20Express" target="_blank" class="btn-whatsapp" style="background:var(--green); color:white;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.5.5 0 0 0 .611.612l5.694-1.49A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.504-5.236-1.385l-.374-.22-3.882 1.016 1.03-3.773-.242-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Consultar por WhatsApp
+        </a>
+        <a href="#" class="btn-mp" id="mp1" style="display:none;">
+          💳 Pagar con Mercado Pago
+        </a>
+        <div class="btn-mp-label">¿Tienes dudas? Escríbeme primero — respondo rápido 😊</div>
+      </div>
+    </div>
+
+    <!-- SERVICIO 2 -->
+    <div class="service-card reveal">
+      <div class="service-card-top">
+        <div class="service-num">2</div>
+        <span class="service-tag" style="color:var(--purple);">Transformación completa</span>
+        <div class="service-name">Asesoría 1:1<br>Online</div>
+        <div class="service-tagline">Tu casa en vivo · Zoom · Grabación + PDF</div>
+        <div class="service-price-block">
+          <span class="service-price" style="color:var(--purple);">$79.900</span>
+          <span class="service-price-label">CLP</span>
+        </div>
+      </div>
+
+      <div class="service-includes">
+        <div class="include-item"><div class="include-dot" style="background:var(--purple);"></div><span>Sesión 60 min por Zoom — tu casa en vivo</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--purple);"></div><span>Recorres tu casa con el celular — espacio real</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--purple);"></div><span>Todos los espacios que quieras trabajar</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--purple);"></div><span>Grabación completa para revisar siempre</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--purple);"></div><span>PDF con decisiones y pasos acordados</span></div>
+        <div class="include-item"><div class="include-dot" style="background:var(--purple);"></div><span>1 semana de consultas por WhatsApp</span></div>
+      </div>
+
+      <div class="service-proceso">
+        <div class="proceso-title">Cómo funciona</div>
+        <div class="proceso-steps">
+          <div class="proceso-step"><span class="proceso-step-num">1</span>Pagas y agendamos Zoom</div>
+          <div class="proceso-step"><span class="proceso-step-num">2</span>Sesión en vivo 60 min</div>
+          <div class="proceso-step"><span class="proceso-step-num">3</span>Grabación + PDF en 24 hrs</div>
+          <div class="proceso-step"><span class="proceso-step-num">4</span>1 semana WhatsApp</div>
+        </div>
+      </div>
+
+      <div class="service-cta">
+        <a href="https://wa.me/56920365399?text=Hola%20Camila%2C%20quiero%20info%20sobre%20la%20Asesoría%201%3A1%20Online" target="_blank" class="btn-whatsapp" style="background:var(--purple); color:white;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.5.5 0 0 0 .611.612l5.694-1.49A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.504-5.236-1.385l-.374-.22-3.882 1.016 1.03-3.773-.242-.389A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Consultar por WhatsApp
+        </a>
+        <a href="#" class="btn-mp" id="mp2" style="display:none;">
+          💳 Pagar con Mercado Pago
+        </a>
+        <div class="btn-mp-label">¿Tienes dudas? Escríbeme primero — respondo rápido 😊</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TESTIMONIO -->
+<div class="testimonios">
+  <div class="section-label">Lo que dicen mis clientas</div>
+  <h2 class="section-title reveal" style="margin-bottom:2rem;">Resultados <em>reales</em></h2>
+  <div class="testimonio-card reveal">
+    <div class="quote-mark">"</div>
+    <p class="testimonio-text">"Nuestro departamento quedó hermoso y sobresale el buen gusto. Reconozco soy exigente en todo y quedó más bonito que lo que me imaginaba."</p>
+    <div class="testimonio-autor">
+      <div class="testimonio-avatar">J</div>
+      <div>
+        <div class="testimonio-nombre">Jenny S.</div>
+        <div class="testimonio-proyecto">Amoblado y decoración depto completo · Santiago</div>
+        <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIEN SOY -->
+<div class="quien-soy">
+  <div class="quien-soy-eyebrow">Quién soy</div>
+  <h2 class="quien-soy-title">Arquitecta de interiores.<br><em>Democratizando la decoración.</em></h2>
+  <p class="quien-soy-text">Llevo años decorando casas, departamentos, oficinas y tiendas de alta gama en Santiago. Lo que aprendí es que el criterio que hace que un espacio funcione no depende del presupuesto — depende de las decisiones correctas. Y eso es exactamente lo que te enseño.</p>
+  <a href="https://instagram.com/casa.diseno.cl" target="_blank" class="quien-soy-ig">
+    Ver mi trabajo en Instagram →
+  </a>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="section-label" style="text-align:center;">Preguntas frecuentes</div>
+  <h2 class="section-title reveal" style="margin-bottom:2rem;">Dudas <em>comunes</em></h2>
+
+  <div class="faq-item">
+    <div class="faq-q">¿Cómo pago?</div>
+    <div class="faq-a">Por transferencia bancaria — te paso los datos por WhatsApp cuando quieras agendar. Pronto también disponible por Mercado Pago.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Y si las fotos no se ven bien el espacio?</div>
+    <div class="faq-a">No te preocupes — te digo exactamente qué fotos necesito y desde qué ángulos. Funciona perfecto así.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">No sé usar Zoom, ¿es complicado?</div>
+    <div class="faq-a">Solo tienes que hacer clic en el link que te mando — no necesitas instalar nada. Si necesitas te explico antes de la sesión.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿En 60 minutos alcanza para toda la casa?</div>
+    <div class="faq-a">Sí — trabajo con un método claro que permite avanzar rápido. Además tienes la grabación para revisar después y una semana de WhatsApp para las dudas.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Es lo mismo que buscar en Pinterest?</div>
+    <div class="faq-a">Pinterest te da inspiración. Yo te doy un plan para TU espacio, TU presupuesto y TUS muebles actuales. Son cosas muy distintas.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Puedo empezar con el diagnóstico y después hacer la asesoría?</div>
+    <div class="faq-a">Sí, muchas clientas hacen exactamente eso. El diagnóstico es perfecto para empezar con 1 espacio específico y ver cómo trabajo.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Casa Diseño</div>
+  <div class="footer-tagline">Camila Ramírez · Arquitecta de Interiores · Santiago, Chile</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/casa.diseno.cl" target="_blank" class="footer-link">Instagram</a>
+    <a href="https://wa.me/56920365399" target="_blank" class="footer-link">WhatsApp</a>
+    <a href="https://linktr.ee/casa.diseno.cl" target="_blank" class="footer-link">Linktree</a>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta">
+  <a href="https://wa.me/56920365399?text=Hola%20Camila%2C%20quiero%20info%20sobre%20el%20Diagnóstico%20Express" target="_blank" class="sticky-btn" style="background:var(--green);color:white;">🔍 Diagnóstico $29.900</a>
+  <a href="https://wa.me/56920365399?text=Hola%20Camila%2C%20quiero%20info%20sobre%20la%20Asesoría%201%3A1" target="_blank" class="sticky-btn" style="background:var(--purple);color:white;">📐 Asesoría $79.900</a>
+</div>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// Para agregar Mercado Pago cuando lo tengas:
+// 1. Reemplaza el href del botón #mp1 con tu link de MP para Diagnóstico
+// 2. Reemplaza el href del botón #mp2 con tu link de MP para Asesoría
+// 3. Cambia style="display:none;" por style="display:flex;" en cada botón
+</script>
+</body>
+</html>
